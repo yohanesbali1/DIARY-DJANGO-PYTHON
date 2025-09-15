@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from notes.models import Note
+from notes.models import notes
 from notes.validation.note_validation import NoteValidation
 
 @login_required
 def index(request):
-    notes = Note.objects.filter(user=request.user)
+    notes = notes.objects.filter(user=request.user)
     return render(request, "notes/note_list.html", {"notes": notes})
 
 @login_required
@@ -23,7 +23,7 @@ def create(request):
 
 @login_required
 def edit(request, pk):
-    note = get_object_or_404(Note, pk=pk, user=request.user)
+    note = get_object_or_404(notes, pk=pk, user=request.user)
     if request.method == "POST":
         form = NoteValidation(request.POST, instance=note)
         if form.is_valid():
@@ -35,7 +35,7 @@ def edit(request, pk):
 
 @login_required
 def delete(request, pk):
-    note = get_object_or_404(Note, pk=pk, user=request.user)
+    note = get_object_or_404(notes, pk=pk, user=request.user)
     if request.method == "POST":
         note.delete()
         return redirect("note_index")

@@ -1,3 +1,3 @@
-from .notes import Notes
+from .notes import notes
 
-__all__ = ["Notes"]
+__all__ = ["notes"]
