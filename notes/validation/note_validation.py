@@ -1,9 +1,9 @@
 from django import forms
-from notes.models import Note
+from notes.models import Notes
 
 class NoteValidation(forms.ModelForm):
     class Meta:
-        model = Note
+        model = Notes
         fields = ["title", "content"]
         error_messages = {
             "title": {

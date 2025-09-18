@@ -30,8 +30,10 @@ def login_view(request):
                 return redirect("note_index")
             else:
                 messages.error(request, "Username atau password salah")
+                return redirect("login")
     else:
         form = LoginValidation()
+        
     return render(request, "auth/login.html", {"form": form})
 
 
