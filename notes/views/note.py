@@ -5,6 +5,7 @@ from notes.validation.note_validation import NoteValidation
 
 @login_required
 def index(request):
+    print("masuk index")
     notes = Notes.objects.filter(user=request.user)
     return render(request, "notes/note_list.html", {"notes": notes})
 

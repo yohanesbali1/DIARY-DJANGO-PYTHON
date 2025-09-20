@@ -7,14 +7,13 @@ from notes.validation.auth_validation import RegisterValidation, LoginValidation
 
 def register_view(request):
     if request.method == "POST":
-        print(request.POST)
         form = RegisterValidation(request.POST)
         print(form.errors)
         if form.is_valid():
             username = form.cleaned_data["username"]
+            email = form.cleaned_data["email"]
             password = form.cleaned_data["password"]
-            user = User.objects.create_user(username=username, password=password)
-            print(user)
+            user = User.objects.create_user(username=username, password=password,email=email)
             login(request, user)
             return redirect("login")
         else:

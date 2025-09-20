@@ -17,7 +17,7 @@ Including another URLconf
 
 # from django.contrib import admin
 from django.urls import path
-from notes.views import auth
+from notes.views import auth, note
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -27,7 +27,7 @@ urlpatterns = [
     path("register/", auth.register_view, name="register"),
 
     # Notes CRUD
-    # path("", note.note_list, name="note_list"),
+    path("/notes", note.index),
     # path("create/", note.note_create, name="note_create"),
     # path("update/<int:pk>/", note.note_update, name="note_update"),
     # path("delete/<int:pk>/", note.note_delete, name="note_delete"),

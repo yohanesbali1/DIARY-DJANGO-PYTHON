@@ -9,6 +9,7 @@ class LoginValidation(forms.Form):
     
 class RegisterValidation(forms.Form):
     username = forms.CharField(required=True, error_messages={'required': 'Username is required'})
+    email = forms.EmailField(required=True, error_messages={'required': 'Email is required', 'invalid': 'Enter a valid email address'})
     password = forms.CharField(required=True, error_messages={'required': 'Password is required'})
     confirm_password = forms.CharField(required=True, error_messages={'required': 'Confirm Password is required'})
     

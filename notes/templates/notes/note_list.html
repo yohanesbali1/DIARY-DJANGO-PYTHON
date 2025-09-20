@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Catatan Saya{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Catatan Saya</h2>
+  <a href="{% url 'note_create' %}" class="btn btn-primary">+ Tambah Catatan</a>
+</div>
+
+{% if notes %}
+  <div class="row">
+    {% for note in notes %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ note.title }}</h5>
+            <p class="card-text text-truncate" style="max-height: 4.5em;">
+              {{ note.content }}
+            </p>
+            <p class="text-muted small mb-2">
+              {{ note.created_at|date:"d M Y H:i" }}
+            </p>
+            <div class="d-flex justify-content-between">
+              <a href="{% url 'note_detail' note.id %}" class="btn btn-sm btn-outline-primary">Lihat</a>
+              <a href="{% url 'note_edit' note.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+              <a href="{% url 'note_delete' note.id %}" class="btn btn-sm btn-outline-danger">Hapus</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="alert alert-info">
+    Belum ada catatan. <a href="{% url 'note_create' %}">Tambah sekarang</a>.
+  </div>
+{% endif %}
+{% endblock %}
