@@ -1,6 +1,6 @@
 # 📝 Django Notes App
 
-Project ini adalah aplikasi catatan sederhana menggunakan **Django**.  
+Project ini adalah aplikasi catatan sederhana menggunakan **Django**.
 Fitur utama:
 
 - Autentikasi user (login/logout).
@@ -24,7 +24,7 @@ Fitur utama:
    ```bash
    python -m venv venv
    source venv/bin/activate   # Mac/Linux
-   venv\Scripts\activate      # Windows
+   venv\Scripts\activate     # Windows
    ```
 
 3. **Install dependencies**
@@ -39,13 +39,25 @@ Fitur utama:
    python manage.py migrate
    ```
 
-5. **Buat superuser**
+5. **Jalankan seeder untuk data awal**
+
+   Seeder akan otomatis membuat user:
+
+   - **Superadmin**: username `admin`, password `admin123`
+   - **Editor**: username `editor`, password `editor123`
+
+   ```bash
+   python manage.py seed_data
+   ```
+
+6. **Buat superuser (opsional)**
 
    ```bash
    python manage.py createsuperuser
    ```
 
-6. **Jalankan server**
+7. **Jalankan server**
+
    ```bash
    python manage.py runserver
    ```
@@ -54,14 +66,22 @@ Fitur utama:
 
 ## 🧪 Testing
 
-Project ini sudah dilengkapi dengan unit test.  
+Project ini sudah dilengkapi dengan unit test menggunakan Django `TestCase`.
 Untuk menjalankan semua test:
 
 ```bash
 python manage.py test
 ```
 
-Contoh test sederhana (cek model `Note`):
+Contoh test yang tersedia:
+
+- **NoteModelTest**: Menguji pembuatan note dan validasi field.
+- **NoteViewTest**: Menguji akses view:
+
+  - Redirect jika belum login.
+  - Superuser dapat melihat semua catatan.
+
+Contoh test sederhana:
 
 ```python
 class NoteModelTest(TestCase):
@@ -70,21 +90,8 @@ class NoteModelTest(TestCase):
         note = Note.objects.create(user=user, title="Belajar Test", content="Isi catatan")
 
         self.assertEqual(note.title, "Belajar Test")
+        self.assertEqual(note.content, "Isi catatan")
         self.assertEqual(Note.objects.count(), 1)
-```
-
-## 📂 Struktur Project
-
-```
-notes/
-├── migrations/
-├── templates/
-│   └── notes/
-│       └── note_list.html
-├── tests.py
-├── models.py
-├── views.py
-├── urls.py
 ```
 
 ---
