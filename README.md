@@ -7,7 +7,6 @@ Fitur utama:
 - User biasa hanya bisa melihat catatannya sendiri.
 - Superuser bisa melihat semua catatan.
 - Unit test dengan `django.test.TestCase`.
-- CI/CD menggunakan **GitHub Actions**.
 
 ---
 
