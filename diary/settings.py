@@ -76,28 +76,16 @@ WSGI_APPLICATION = "diary.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# if os.environ.get("GITHUB_ACTIONS") == "true":
 DATABASES = {
     "default": {
             "ENGINE": "django.db.backends.mysql",
             "NAME": "diary_django_db",
             "USER": "root",
             "PASSWORD": "password",
-            "HOST": "mysql",  
-            "PORT": "3306",
+            "HOST": "127.0.0.1",
+            "PORT": "3308",
     }
 }
-# else:
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.mysql",
-#             "NAME": "diary_django_db",
-#             "USER": "root",
-#             "PASSWORD": "password",
-#             "HOST": "127.0.0.1",
-#             "PORT": "3308",
-#         }
-#     }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
