@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  {% if note %}Edit Note{% else %}Create Note{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-lg border-0">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">
+          {% if note %}Edit Note{% else %}Create Note{% endif %}
+        </h4>
+      </div>
+      <div class="card-body">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+        <form method="post">
+          {% csrf_token %}
+
+          <!-- Title -->
+          <div class="mb-3">
+            <label for="id_title" class="form-label">Title</label>
+            <input
+              type="text"
+              name="title"
+              id="id_title"
+              class="form-control"
+              value="{% if note %}{{ note.title }}{% endif %}"
+              placeholder="Enter your note title"
+              required
+            />
+             {% if form.title.errors %}
+              <div class="text-danger small">
+                {% for error in form.title.errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Content -->
+          <div class="mb-3">
+            <label for="id_content" class="form-label">Content</label>
+            <textarea
+              name="content"
+              id="id_content"
+              rows="5"
+              class="form-control"
+              placeholder="Write your note here..."
+              required
+            >{% if note %}{{ note.content }}{% endif %}</textarea>
+            {% if form.content.errors %}
+              <div class="text-danger small">
+                {% for error in form.content.errors %}
+                  {{ error }}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary w-100">
+            {% if note %}Update Note{% else %}Save Note{% endif %}
+          </button>
+        </form>
+      </div>
+      <div class="card-footer text-center">
+        <a href="{% url 'notes:note_index' %}" class="btn btn-link">← Back to Notes</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

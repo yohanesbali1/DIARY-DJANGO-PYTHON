@@ -1,0 +1,6 @@
+Django>=4.2
+python-dotenv
+pymysql>=1.0
+# Jika mau pake mysqlclient (lebih cepat), comment pymysql dan gunakan:
+mysqlclient>=2.1
+django_extensions
